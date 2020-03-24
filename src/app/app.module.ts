@@ -9,8 +9,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
-import {MatListModule} from '@angular/material/list';
 import { environment } from 'src/environments/environment';
+
+import { MaterialModule } from './material/material.module';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -21,9 +23,10 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-AngularFirestoreModule,
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
-    MatListModule
+    MaterialModule,
+    SharedModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

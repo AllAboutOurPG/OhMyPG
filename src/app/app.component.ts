@@ -12,6 +12,6 @@ export class AppComponent {
   pgList: Observable<any>;
 
   constructor(private firestore: AngularFirestore){
-    this.pgList = this.firestore.collection('PGS').valueChanges();
+    //this.pgList = this.firestore.collection('PGS').valueChanges();
   }
 }
