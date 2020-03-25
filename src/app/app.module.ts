@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SharedModule } from '../shared/shared.module';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

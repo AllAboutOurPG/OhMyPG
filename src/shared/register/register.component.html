@@ -1,22 +1,70 @@
 <div class="register-container">
-    <div class="register-form">
-        <mat-tab-group>
-            <mat-tab label="Personal Details">
-              <ng-template matTabContent>
-                Content 1 - Loaded
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Address Details 2">
-              <ng-template matTabContent>
-                Content 2 - Adress details
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Personal Details 3">
-              <ng-template matTabContent>
-                Content 3 - Loaded
-              </ng-template>
-            </mat-tab>
-          </mat-tab-group>
-    </div>
-</div>
+  <div class="register-form">
+    <form [formGroup]="RegisterForm">
+      <mat-tab-group>
+        <mat-tab label="Personal Details">
+          <ng-template matTabContent>
+            Content 1 - Loaded
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Address Details">
+          <ng-template matTabContent>
 
+            {{RegisterForm.value| json}}
+            <div class="left-half" formGroupName=address>
+              <mat-label>Present Address</mat-label>
+              <br>
+              <mat-form-field>
+                <input formControlName="Address1" matInput placeholder="Address1">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Address2" matInput placeholder="Address2">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Address3" matInput placeholder="Address3">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="LandMark" matInput placeholder="LandMark">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="City" matInput placeholder="City">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>State </mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let state of states" [value]="states.value">
+                    {{state.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <!-- <input formControlName="State" matInput placeholder="State">   -->
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Pincode" (change)="GetState()" matInput placeholder="Pincode">
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="right-half">
+              <mat-label>Permanent Address</mat-label>
+              <br>
+              <!-- <mat-form-field>
+                  <input formControlName="FirstName" matInput placeholder="Pincode">  
+                </mat-form-field>  -->
+            </div>
+
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Personal Details 3">
+          <ng-template matTabContent>
+            Content 3 - Loaded
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </form>
+  </div>
+</div>

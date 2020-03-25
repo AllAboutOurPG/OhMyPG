@@ -5,3 +5,23 @@
   .register-form {
     grid-column: span 12;
   }
+ 
+  
+  .left-half{
+ 
+    
+    left: 0px;
+    height:100%;
+    width: 50%;
+  }
+  
+  .right-half{
+    background-color: #ee222e2c;  
+    
+    height:100%;
+    right: 0px;
+    width: 50%;
+  }
+
+
+  
