@@ -1,13 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {MatListModule, 
         MatTabsModule,
-        MatToolbarModule } from '@angular/material';
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,        
+        MatSelectModule,
+        MatOptionModule
+ } from '@angular/material';
+
+
+ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   exports: [MatListModule,
     MatTabsModule,
-    MatToolbarModule]
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,    
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule,
+    ReactiveFormsModule]
 })
 export class MaterialModule { }

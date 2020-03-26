@@ -1,22 +1,91 @@
-<div class="register-container">
-    <div class="register-form">
-        <mat-tab-group>
-            <mat-tab label="Personal Details">
-              <ng-template matTabContent>
-                Content 1 - Loaded
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Personal Details 2">
-              <ng-template matTabContent>
-                Content 2 - Loaded
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Personal Details 3">
-              <ng-template matTabContent>
-                Content 3 - Loaded
-              </ng-template>
-            </mat-tab>
-          </mat-tab-group>
-    </div>
+<div class="register-container" [formGroup]="registerForm">
+  <div class="register-form">
+    <form [formGroup]="registerForm">
+      <mat-tab-group>
+        <mat-tab label="Personal Details">
+          <ng-template matTabContent>
+            Content 1 - Loaded
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Personal Details 2">
+          <ng-template matTabContent>
+            Content 2 - Loaded
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Official Information">
+          <ng-template matTabContent>
+            <div formGroupName="officalInfo" class="personal-container">
+              <div class="personal-section1">
+                <mat-form-field class="width100">
+                  <mat-label>Profession*</mat-label>
+                  <mat-select formControlName="profession">
+                    <mat-option *ngFor="let profession of professions | async" [value]="profession.type">
+                      {{profession.type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Company/College Name*</mat-label>
+                  <input matInput placeholder="Ex. Infosys Ltd." formControlName="companyName">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Blood Group*</mat-label>
+                  <mat-select formControlName="bloodGroup" [(ngModel)]="_bloodGroup">
+                    <mat-option *ngFor="let bloodGroup of bloodGroups | async" [value]="bloodGroup.type">
+                      {{bloodGroup.type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Emergency Contact Phone1*</mat-label>
+                  <input matInput placeholder="Ex. 9876543210" formControlName="emergencyPhone">                  
+                </mat-form-field>
+              </div>
+              <div class="personal-section2">
+                <mat-form-field class="width100">
+                  <mat-label>Educational Qualification*</mat-label>
+                  <mat-select formControlName="qualification">
+                    <mat-option *ngFor="let qualification of educationalQualifications | async"
+                      [value]="qualification.degree">
+                      {{qualification.degree}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Company/College Location*</mat-label>
+                  <input matInput placeholder="Ex. Gachibowli, Hyderabad." formControlName="companyLocation">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Emergency Contact Name*</mat-label>
+                  <input matInput placeholder="Ex.Remo D'souza" formControlName="emergencyName">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Emergency Contact Phone2</mat-label>
+                  <input matInput placeholder="Ex. 9876543210" formControlName="emergencyPhone2">                  
+                </mat-form-field> 
+              </div>
+              <div class="personal-section3">
+                <mat-form-field class="width100">
+                  <mat-label>Vehicle No(if any)</mat-label>
+                  <input matInput placeholder="Ex. T12EA3456" formControlName="vehicleNo">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Company Email(for employees only)</mat-label>
+                  <input matInput placeholder="Ex. pat@example.com" formControlName="companyEmail">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Relationship with Contact*</mat-label>
+                  <mat-select formControlName="emergencyRelation">
+                    <mat-option *ngFor="let humanRelation of humanRelations | async" [value]="humanRelation.relation">
+                      {{humanRelation.relation}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>              
+            </div>
+          </ng-template>          
+        </mat-tab>
+      </mat-tab-group>
+    </form>
+  </div>  
 </div>
-
