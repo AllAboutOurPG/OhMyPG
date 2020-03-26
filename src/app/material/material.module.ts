@@ -1,26 +1,30 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import {MatListModule, 
         MatTabsModule,
         MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule,        
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
         MatSelectModule,
-        MatOptionModule
- } from '@angular/material';
+        MatOptionModule,
+    MatFormFieldModule
+} from '@angular/material';
 
-
- import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  exports: [MatListModule,
+  exports: [ReactiveFormsModule,
+    MatListModule,
     MatTabsModule,
     MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,    
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatSelectModule,
     MatOptionModule,
-    FormsModule,
-    ReactiveFormsModule]
+    MatFormFieldModule]
 })
 export class MaterialModule { }

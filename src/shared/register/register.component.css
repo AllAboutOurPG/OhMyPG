@@ -5,6 +5,7 @@
   .register-form {
     grid-column: span 12;
   }
+
   .personal-container {
     display: grid;
     grid-column-gap: 50px;
@@ -13,4 +14,10 @@
   }
   .personal-section1, .personal-section2, .personal-section3  {
     grid-column: span 4;
+  }
+
+  @media (max-width: 700px) {
+    .personal-section1, .personal-section2, .personal-section3  {
+      grid-column: span 12;
+    }
   }

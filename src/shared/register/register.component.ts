@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { FormControl, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
@@ -10,10 +10,10 @@ import { ErrorStateMatcher } from '@angular/material';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  professions: Observable<any>;
-  bloodGroups: Observable<any>;
-  educationalQualifications: Observable<any>;
-  humanRelations: Observable<any>;
+    professions: Observable<any>;
+    bloodGroups: Observable<any>;
+    educationalQualifications: Observable<any>;
+    humanRelations: Observable<any>;
 
   registerForm = this.registerFormBuilder.group({
     personalDetails: this.registerFormBuilder.group({
@@ -23,6 +23,17 @@ export class RegisterComponent implements OnInit {
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       martialStatus: ['', Validators.required],
+      diffAbled: ['', Validators.required],
+      email1: ['', [Validators.required, Validators.email]],
+      email2: ['', [Validators.required,  Validators.email]],
+      mobile1: ['', [Validators.required, Validators.minLength(10)]],
+      mobile2: ['',  [Validators.required, Validators.minLength(10)]],
+      religion: ['', Validators.required],
+      nationality: ['', Validators.required],
+      domicile: ['', Validators.required],
+      aadharNo: ['', Validators.required],
+      panNo: ['', Validators.required],
+      passportNo: ['', Validators.required]
     }),
     address: this.registerFormBuilder.group({
       street: [''],
@@ -30,22 +41,38 @@ export class RegisterComponent implements OnInit {
       state: [''],
       zip: ['']
     }),
-    officalInfo: this.registerFormBuilder.group({
-      profession: ['', Validators.required],
-      qualification: ['', Validators.required],
-      bloodGroup: ['', Validators.required],
-      companyName: ['',Validators.required],
-      companyLocation:['',Validators.required],
-      emergencyName:['',Validators.required],
-      emergencyRelation:['',Validators.required],
-      emergencyPhone:['',[Validators.pattern('^[6-9]\\d{9}$'),Validators.required]],
-      emergencyPhone2:['',Validators.pattern('^[6-9]\\d{9}$')],
-      companyEmail:['',Validators.email],
-      vehicleNo:['']
-    }),    
-  }); 
-  
+      officalInfo: this.registerFormBuilder.group({
+          profession: ['', Validators.required],
+          qualification: ['', Validators.required],
+          bloodGroup: ['', Validators.required],
+          companyName: ['', Validators.required],
+          companyLocation: ['', Validators.required],
+          emergencyName: ['', Validators.required],
+          emergencyRelation: ['', Validators.required],
+          emergencyPhone: ['', [Validators.pattern('^[6-9]\\d{9}$'), Validators.required]],
+          emergencyPhone2: ['', Validators.pattern('^[6-9]\\d{9}$')],
+          companyEmail: ['', Validators.email],
+          vehicleNo: ['']
+      })
+  });
 
+  genderList: Array<any> = [
+    {'value': 'M','text': 'Male'},
+    {'value': 'F','text': 'FeMale'},
+    {'value': 'O','text': 'Others'}
+  ];
+  martialStatus: Array<any> = [
+    {'value': true,'text': 'Married'},
+    {'value': false,'text': 'UnMarried'}
+  ];
+
+  religionList : Array<any> = [
+    {'value': 'Hindu', 'text': 'Hindu'},
+    {'value': 'Christian', 'text': 'Christian'},
+    {'value': 'Muslim', 'text': 'Muslim'},
+    {'value': 'Others', 'text': 'Others'}
+  ]
+  
   constructor(private firestore: AngularFirestore,private registerFormBuilder: FormBuilder) {
     this.professions = this.firestore.collection('Professions',x=>x.orderBy('type')).valueChanges();
     this.bloodGroups = this.firestore.collection('BloodGroups',x=>x.orderBy('type')).valueChanges();
