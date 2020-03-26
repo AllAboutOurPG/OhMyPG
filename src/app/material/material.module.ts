@@ -4,7 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatListModule, 
         MatTabsModule,
         MatToolbarModule,
-        MatInputModule } from '@angular/material';
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatRadioModule } from '@angular/material';
 
 
 @NgModule({
@@ -12,6 +16,10 @@ import {MatListModule,
     MatListModule,
     MatTabsModule,
     MatToolbarModule,
-    MatInputModule]
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatRadioModule]
 })
 export class MaterialModule { }
