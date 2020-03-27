@@ -118,9 +118,91 @@
             </div>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Personal Details 2">
+        <mat-tab label="Address Details ">
           <ng-template matTabContent>
-            Content 2 - Loaded
+            <section class="Address-container">
+              <div class="card" formGroupName="presentaddress">
+                <mat-label>Present Address</mat-label>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address1*</mat-label>
+                  <input formControlName="address1" matInput placeholder="Address1">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address2*</mat-label>
+                  <input formControlName="address2" matInput placeholder="Address2">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address3</mat-label>
+                  <input formControlName="address3" matInput placeholder="Address3">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>LandMark</mat-label>
+                  <input formControlName="landMark" matInput placeholder="LandMark">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>City*</mat-label>
+                  <input formControlName="city" matInput placeholder="City">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>State*</mat-label>
+                  <input formControlName="state" matInput placeholder="State">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Pincode*</mat-label>
+                  <input formControlName="pincode" matInput placeholder="Pincode">
+                </mat-form-field>
+                <br>
+                <div *ngIf="registerForm.get('presentaddress').valid">
+                  <mat-checkbox (change)="CopyAddress()" [formControl]="isSameAddressControl">Copy Permanent address
+                    same as Present address </mat-checkbox>
+                </div>
+              </div>
+              <div class="card" formGroupName="permanentaddress">
+                <mat-label>Permanent Address</mat-label>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address1*</mat-label>
+                  <input formControlName="address1" matInput placeholder="Address1">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address2*</mat-label>
+                  <input formControlName="address2" matInput placeholder="Address2">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Address3</mat-label>
+                  <input formControlName="address3" matInput placeholder="Address3">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>LandMark</mat-label>
+                  <input formControlName="landMark" matInput placeholder="LandMark">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>City*</mat-label>
+                  <input formControlName="city" matInput placeholder="City">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>State*</mat-label>
+                  <input formControlName="state" matInput placeholder="State">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="width100">
+                  <mat-label>Pincode*</mat-label>
+                  <input formControlName="pincode" matInput placeholder="Pincode">
+                </mat-form-field>
+              </div>
+            </section>
           </ng-template>
         </mat-tab>
         <mat-tab label="Official Information">
