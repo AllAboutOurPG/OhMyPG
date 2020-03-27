@@ -1,129 +1,129 @@
 <div class="register-container">
-    <div class="register-form">
-      <form [formGroup]="registerForm">
-        <mat-tab-group>
-            <mat-tab label="Personal Details">
-              <ng-template matTabContent>
-                <div formGroupName="personalDetails" class="personal-container">
-                  <div class="personal-section1">
-                    <mat-form-field class="width100">
-                      <mat-label>First Name*</mat-label>
-                      <input matInput placeholder="Amir" formControlName="firstName">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Middle Name*</mat-label>
-                      <input matInput placeholder="Kumar" formControlName="middleName">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Last Name*</mat-label>
-                      <input matInput placeholder="Dada" formControlName="lastName">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Gender*</mat-label>
-                      <mat-select formControlName="gender">
-                        <mat-option *ngFor="let gender of genderList" [value]="gender.value">
-                          {{gender.text}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Date of Birth*</mat-label>
-                      <input matInput [matDatepicker]="dob" formControlName="dob">
-                      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
-                      <mat-datepicker #dob></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Gender*</mat-label>
-                      <mat-select formControlName="gender">
-                        <mat-option *ngFor="let status of genderList" [value]="status.value">
-                          {{status.text}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Martial Status*</mat-label>
-                      <mat-select formControlName="martialStatus">
-                        <mat-option *ngFor="let status of martialStatus" [value]="status.value">
-                          {{status.text}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Differently Abled*</mat-label>
-                      <mat-select formControlName="diffAbled">
-                        <mat-option  [value]="true">
-                          Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                          No
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="personal-section2">
-                    <mat-form-field class="width100">
-                      <mat-label>Email 1*</mat-label>
-                      <input matInput placeholder="abcd@gmail.com" formControlName="email1">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Email 2*</mat-label>
-                      <input matInput placeholder="abcd@gmail.com" formControlName="email2">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Mobile 1*</mat-label>
-                      <input matInput placeholder="987654321" formControlName="mobile1" maxlength="10">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Mobile 2*</mat-label>
-                      <input matInput placeholder="987654321" formControlName="mobile2" maxlength="10">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Religion*</mat-label>
-                      <mat-select formControlName="religion">
-                        <mat-option *ngFor="let religion of religionList" [value]="religion.value">
-                          {{religion.text}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Nationality*</mat-label>
-                      <mat-select formControlName="nationality">
-                        <mat-option  [value]="Indian">
-                          Indian
-                        </mat-option>
-                        <mat-option [value]="Others">
-                          Others
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <!-- <mat-form-field class="width100">
-                      <mat-label>Domicile*</mat-label>
-                      <input matInput placeholder="" formControlName="domicile">
-                    </mat-form-field> -->
-                  </div>
-                  <div class="personal-section3">
-                    <mat-form-field class="width100">
-                      <mat-label>Aadhar No*</mat-label>
-                      <input matInput placeholder="000011112222" formControlName="aadharNo" type="number" maxlength="12">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>PAN No</mat-label>
-                      <input matInput placeholder="ABCDE1234F" formControlName="panNo" maxlength="10">
-                    </mat-form-field>
-                    <mat-form-field class="width100">
-                      <mat-label>Passport No</mat-label>
-                      <input matInput placeholder="J1234567" formControlName="passportNo" maxlength="8">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Personal Details 2">
-              <ng-template matTabContent>
-                Content 2 - Loaded
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Official Information">
+  <div class="register-form">
+    <form [formGroup]="registerForm">
+      <mat-tab-group>
+        <mat-tab label="Personal Details">
+          <ng-template matTabContent>
+            <div formGroupName="personalDetails" class="personal-container">
+              <div class="personal-section1">
+                <mat-form-field class="width100">
+                  <mat-label>First Name*</mat-label>
+                  <input matInput placeholder="Ex : Subhash" formControlName="firstName">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Gender*</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genders | async" [value]="gender.gender">
+                      {{gender.gender}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Differently Abled*</mat-label>
+                  <mat-select formControlName="diffAbled">
+                    <mat-option [value]="true">
+                      Yes
+                    </mat-option>
+                    <mat-option [value]="false">
+                      No
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Email 1*</mat-label>
+                  <input matInput placeholder="Ex : michealjackson@gmail.com" formControlName="email1">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Religion*</mat-label>
+                  <mat-select formControlName="religion">
+                    <mat-option *ngFor="let religion of religions | async" [value]="religion.religion">
+                      {{religion.religion}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Aadhar No*</mat-label>
+                  <input matInput placeholder="Ex: 987654321098" formControlName="aadharNo">
+                </mat-form-field>
+              </div>
+              <div class="personal-section2">
+                <mat-form-field class="width100">
+                  <mat-label>Last Name*</mat-label>
+                  <input matInput placeholder="Ex : Bose" formControlName="lastName">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Date of Birth*</mat-label>
+                  <input matInput [matDatepicker]="dob" formControlName="dob">
+                  <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                  <mat-datepicker #dob></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Mobile 1*</mat-label>
+                  <input matInput placeholder="Ex. 9876543210" formControlName="mobile1" maxlength="10">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Email 2</mat-label>
+                  <input matInput placeholder="Ex : michealjackson@gmail.com" formControlName="email2">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Nationality*</mat-label>
+                  <mat-select formControlName="nationality">
+                    <mat-option [value]="Indian">
+                      Indian
+                    </mat-option>
+                    <mat-option [value]="Others">
+                      Others
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>PAN No</mat-label>
+                  <input matInput placeholder="ABCDE1234F" formControlName="panNo" maxlength="10">
+                </mat-form-field>
+              </div>
+              <div class="personal-section3">
+                <mat-form-field class="width100">
+                  <mat-label>Middle Name</mat-label>
+                  <input matInput placeholder="Ex: Chandra" formControlName="middleName">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Martial Status*</mat-label>
+                  <mat-select formControlName="martialStatus">
+                    <mat-option *ngFor="let status of martialStatus | async" [value]="status.status">
+                      {{status.status}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Mobile 2</mat-label>
+                  <input matInput placeholder="Ex. 9876543210" formControlName="mobile2" maxlength="10">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Languages Known</mat-label>
+                  <mat-select formControlName="languagesKnown" multiple>
+                    <mat-option *ngFor="let language of languages | async" [value]="language.language">
+                      {{language.language}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Domicile*</mat-label>
+                  <input matInput placeholder="Ex: Andhra Pradesh" formControlName="domicile">
+                </mat-form-field>
+                <mat-form-field class="width100">
+                  <mat-label>Passport No</mat-label>
+                  <input matInput placeholder="Ex : J1234567" formControlName="passportNo" maxlength="8">
+                </mat-form-field>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Personal Details 2">
+          <ng-template matTabContent>
+            Content 2 - Loaded
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Official Information">
           <ng-template matTabContent>
             <div formGroupName="officalInfo" class="personal-container">
               <div class="personal-section1">
@@ -137,7 +137,7 @@
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Company/College Name*</mat-label>
-                  <input matInput placeholder="Ex. Infosys Ltd." formControlName="companyName">
+                  <input matInput placeholder="Ex: Facebook, Inc." formControlName="companyName">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Blood Group*</mat-label>
@@ -149,7 +149,7 @@
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Emergency Contact Phone1*</mat-label>
-                  <input matInput placeholder="Ex. 9876543210" formControlName="emergencyPhone">                  
+                  <input matInput placeholder="Ex: 9876543210" formControlName="emergencyPhone">
                 </mat-form-field>
               </div>
               <div class="personal-section2">
@@ -164,25 +164,25 @@
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Company/College Location*</mat-label>
-                  <input matInput placeholder="Ex. Gachibowli, Hyderabad." formControlName="companyLocation">
+                  <input matInput placeholder="Ex: Financial District, Hyderabad." formControlName="companyLocation">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Emergency Contact Name*</mat-label>
-                  <input matInput placeholder="Ex.Remo D'souza" formControlName="emergencyName">
+                  <input matInput placeholder="Ex: Remo D'souza" formControlName="emergencyName">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Emergency Contact Phone2</mat-label>
-                  <input matInput placeholder="Ex. 9876543210" formControlName="emergencyPhone2">                  
-                </mat-form-field> 
+                  <input matInput placeholder="Ex: 9876543210" formControlName="emergencyPhone2">
+                </mat-form-field>
               </div>
               <div class="personal-section3">
                 <mat-form-field class="width100">
                   <mat-label>Vehicle No(if any)</mat-label>
-                  <input matInput placeholder="Ex. T12EA3456" formControlName="vehicleNo">
+                  <input matInput placeholder="Ex: TS12AB3456" formControlName="vehicleNo">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Company Email(for employees only)</mat-label>
-                  <input matInput placeholder="Ex. pat@example.com" formControlName="companyEmail">
+                  <input matInput placeholder="Ex: markzukerberg@facebook.com" formControlName="companyEmail">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Relationship with Contact*</mat-label>
@@ -192,12 +192,11 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>              
+              </div>
             </div>
-          </ng-template>          
+          </ng-template>
         </mat-tab>
-          </mat-tab-group>
-      </form>
-    </div>
+      </mat-tab-group>
+    </form>
+  </div>
 </div>
-
