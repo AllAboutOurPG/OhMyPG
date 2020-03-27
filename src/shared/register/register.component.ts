@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
-interface State {
-  value: string;
-  viewValue: string;
-}
-
+import { FormBuilder, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -14,38 +7,37 @@ interface State {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  estates: string[]= ['AndhraPradesh','odisha','Telangana', 'westBengal'];
-   states: State[] = [
-    {value: 'steak-0', viewValue: 'AndhraPradesh'},
-    {value: 'pizza-1', viewValue: 'Odisha'},
-    {value: 'tacos-2', viewValue: 'Telangana'}
-  ];
-  result:any;
-  
+  public isSameAddressControl: FormControl = new FormControl(false);
   RegisterForm = this.fb.group({
-    address: this.fb.group({
-    Address1: ['', Validators.required],
-    Address2: ['',Validators.required],
-    Address3: ['',],
-    LandMark: ['',Validators.pattern('^[a-zA-Z]+$')],
-    City: ['',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]],
-  // State: new FormControl('',Validators.required),
-  Pincode: ['',[Validators.required,Validators.pattern('^[0-9]{6,6}$')]]
-    })
+    presentaddress: this.fb.group({
+    Address1: ['', [Validators.required, Validators.maxLength(30)]],
+    Address2: ['', [Validators.required, Validators.maxLength(30)]],
+    Address3: [''],
+    LandMark: ['', [Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
+    City: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
+   State: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+   Pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
+    }),
+    permanentaddress: this.fb.group({
+      Address1: ['', Validators.required],
+      Address2: ['', Validators.required],
+      Address3: [''],
+      LandMark: ['', Validators.pattern('^[a-zA-Z]+$')],
+      City: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+     State: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+     Pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
+      }),
     });
-   constructor(private fb: FormBuilder,private http: HttpClient) { }
-  ngOnInit() { }
+   constructor(private fb: FormBuilder) { }
+  ngOnInit() {
+  }
 
-  GetState()
-  {
-    console.log(this.RegisterForm.get('address').get('Pincode').value);
-    //console.log(this.http.get<any>('http://www.postalpincode.in/api/pincode/503001'));
-
-    this.http.get('http://www.postalpincode.in/api/pincode/503001').subscribe(
-            result => console.log(result),
-            error => console.log(error),
-            () => {}
-    )
-    
+  CopyAddress() {
+    if (this.isSameAddressControl.value) {
+    const value = this.RegisterForm.get('presentaddress').value;
+    this.RegisterForm.get('permanentaddress').patchValue(value);
+    } else {
+      this.RegisterForm.get('permanentaddress').reset();
+    }
   }
 }

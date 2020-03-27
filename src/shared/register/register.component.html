@@ -9,17 +9,16 @@
         </mat-tab>
         <mat-tab label="Address Details">
           <ng-template matTabContent>
-
-            {{RegisterForm.value| json}}
-            <div class="left-half" formGroupName=address>
+            <section class="AddressGrid">
+            <div class="card" formGroupName="presentaddress">
               <mat-label>Present Address</mat-label>
               <br>
               <mat-form-field>
-                <input formControlName="Address1" matInput placeholder="Address1">
+                <input formControlName="Address1" matInput placeholder="Address1*">
               </mat-form-field>
               <br>
               <mat-form-field>
-                <input formControlName="Address2" matInput placeholder="Address2">
+                <input formControlName="Address2" matInput placeholder="Address2*">
               </mat-form-field>
               <br>
               <mat-form-field>
@@ -31,32 +30,53 @@
               </mat-form-field>
               <br>
               <mat-form-field>
-                <input formControlName="City" matInput placeholder="City">
+                <input formControlName="City" matInput placeholder="City*">
               </mat-form-field>
               <br>
-              <mat-form-field>
-                <mat-label>State </mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let state of states" [value]="states.value">
-                    {{state.viewValue}}
-                  </mat-option>
-                </mat-select>
-                <!-- <input formControlName="State" matInput placeholder="State">   -->
-              </mat-form-field>
+                <mat-form-field>
+                  <input formControlName="State" matInput placeholder="State*">
+                </mat-form-field>
               <br>
               <mat-form-field>
-                <input formControlName="Pincode" (change)="GetState()" matInput placeholder="Pincode">
+                <input formControlName="Pincode"    matInput placeholder="Pincode*">
               </mat-form-field>
+              <br>
+              <div *ngIf="RegisterForm.get('presentaddress').valid">
+                <mat-checkbox  (change)="CopyAddress()" [formControl]="isSameAddressControl">Copy Permanent address same as Present address	</mat-checkbox>
+              </div>
             </div>
-            <br>
-            <div class="right-half">
+            <div class="card" formGroupName="permanentaddress">
               <mat-label>Permanent Address</mat-label>
               <br>
-              <!-- <mat-form-field>
-                  <input formControlName="FirstName" matInput placeholder="Pincode">  
-                </mat-form-field>  -->
+              <mat-form-field>
+                <input formControlName="Address1" matInput placeholder="Address1*">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Address2" matInput placeholder="Address2*">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Address3" matInput placeholder="Address3">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="LandMark" matInput placeholder="LandMark">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="City" matInput placeholder="City*">
+              </mat-form-field>
+              <br>
+                <mat-form-field>
+                  <input formControlName="State" matInput placeholder="State*">
+                </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input formControlName="Pincode"  matInput placeholder="Pincode*">
+              </mat-form-field>
             </div>
-
+          </section>
           </ng-template>
         </mat-tab>
         <mat-tab label="Personal Details 3">
