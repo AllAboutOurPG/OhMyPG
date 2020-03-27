@@ -21,3 +21,10 @@
       grid-column: span 12;
     }
   }
+
+  .Address-container {
+    display: grid;
+    grid-column-gap: 150px;
+    grid-template-columns: repeat(auto-fit,minmax(384px, 1fr));
+    padding:40px;
+  }
