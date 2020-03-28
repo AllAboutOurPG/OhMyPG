@@ -223,7 +223,7 @@
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Blood Group*</mat-label>
-                  <mat-select formControlName="bloodGroup" [(ngModel)]="_bloodGroup">
+                  <mat-select formControlName="bloodGroup">
                     <mat-option *ngFor="let bloodGroup of bloodGroups | async" [value]="bloodGroup.type">
                       {{bloodGroup.type}}
                     </mat-option>
