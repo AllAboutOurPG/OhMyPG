@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   martialStatus: Observable<any>;
   religions: Observable<any>;
   isSameAddressControl: FormControl = new FormControl(false);
+  success = false;
 
   registerForm = this.registerFormBuilder.group({
     personalDetails: this.registerFormBuilder.group({
@@ -34,13 +35,14 @@ export class RegisterComponent implements OnInit {
       mobile1: ['', [Validators.required, Validators.pattern('^[6-9]\\d{9}$')]],
       mobile2: ['', [Validators.pattern('^[6-9]\\d{9}$')]],
       religion: ['', Validators.required],
-      nationality: ['', Validators.required],
+      //nationality: ['Indian'],
       domicile: ['', Validators.required],
       aadharNo: ['', [Validators.required, Validators.pattern('^([0-9]){12}$')]],
       panNo: ['', [Validators.pattern('^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$')]],
       passportNo: ['', [Validators.pattern('^(?!^0+$)[a-zA-Z0-9]{3,20}$')]],
       languagesKnown: ['']
     }),
+    address: this.registerFormBuilder.group({
     presentaddress: this.registerFormBuilder.group({
       address1: ['', [Validators.required, Validators.maxLength(30)]],
       address2: ['', [Validators.required, Validators.maxLength(30)]],
@@ -58,7 +60,8 @@ export class RegisterComponent implements OnInit {
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
-    }),
+    })
+  }),
     officalInfo: this.registerFormBuilder.group({
       profession: ['', Validators.required],
       qualification: ['', Validators.required],
@@ -90,11 +93,19 @@ export class RegisterComponent implements OnInit {
 
   CopyAddress() {
     if (this.isSameAddressControl.value) {
-    const value = this.registerForm.get('presentaddress').value;
-    this.registerForm.get('permanentaddress').patchValue(value);
+      const value = this.registerForm.get('address').get('presentaddress').value;
+      this.registerForm.get('address').get('permanentaddress').patchValue(value);
     } else {
-      this.registerForm.get('permanentaddress').reset();
+      this.registerForm.get('address').get('permanentaddress').reset();
     }
   }
 
+  Register() {
+    try {
+      this.firestore.collection('Owner').add(this.registerForm.value);
+      this.success = true;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
