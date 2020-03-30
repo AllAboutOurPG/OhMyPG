@@ -18,10 +18,13 @@ export class RegisterComponent implements OnInit {
   genders: Observable<any>;
   martialStatus: Observable<any>;
   religions: Observable<any>;
+  idProofs: Observable<any>;
   isSameAddressControl: FormControl = new FormControl(false);
+  success = false;
 
   registerForm = this.registerFormBuilder.group({
-    personalDetails: this.registerFormBuilder.group({
+    registerAs: ['', Validators.required],
+    personalDetails: this.registerFormBuilder.group({      
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       middleName: [''],
@@ -29,8 +32,8 @@ export class RegisterComponent implements OnInit {
       dob: ['', Validators.required],
       martialStatus: ['', Validators.required],
       diffAbled: ['', Validators.required],
-      email1: ['', [Validators.required, Validators.email]],
-      email2: ['', [Validators.email]],
+      email1: ['', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
+      email2: ['', [Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
       mobile1: ['', [Validators.required, Validators.pattern('^[6-9]\\d{9}$')]],
       mobile2: ['', [Validators.pattern('^[6-9]\\d{9}$')]],
       religion: ['', Validators.required],
@@ -39,8 +42,9 @@ export class RegisterComponent implements OnInit {
       aadharNo: ['', [Validators.required, Validators.pattern('^([0-9]){12}$')]],
       panNo: ['', [Validators.pattern('^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$')]],
       passportNo: ['', [Validators.pattern('^(?!^0+$)[a-zA-Z0-9]{3,20}$')]],
-      languagesKnown: ['']
+      languagesKnown: ['']      
     }),
+    address: this.registerFormBuilder.group({
     presentaddress: this.registerFormBuilder.group({
       address1: ['', [Validators.required, Validators.maxLength(30)]],
       address2: ['', [Validators.required, Validators.maxLength(30)]],
@@ -58,7 +62,8 @@ export class RegisterComponent implements OnInit {
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
-    }),
+    })
+  }),
     officalInfo: this.registerFormBuilder.group({
       profession: ['', Validators.required],
       qualification: ['', Validators.required],
@@ -69,9 +74,11 @@ export class RegisterComponent implements OnInit {
       emergencyRelation: ['', Validators.required],
       emergencyPhone: ['', [Validators.pattern('^[6-9]\\d{9}$'), Validators.required]],
       emergencyPhone2: ['', Validators.pattern('^[6-9]\\d{9}$')],
-      companyEmail: ['', Validators.email],
-      vehicleNo: ['']
-    })
+      companyEmail: ['', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
+      vehicleNo: ['',Validators.pattern('^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$')]
+    }),
+    uploadFile: ['', Validators.required],
+    chooseFile: ['',Validators.required]
   });
 
   constructor(private firestore: AngularFirestore, private registerFormBuilder: FormBuilder) {
@@ -83,6 +90,7 @@ export class RegisterComponent implements OnInit {
     this.genders = this.firestore.collection('Genders', x => x.orderBy('gender')).valueChanges();
     this.martialStatus = this.firestore.collection('MaritalStatus', x => x.orderBy('status')).valueChanges();
     this.religions = this.firestore.collection('Religions', x => x.orderBy('religion')).valueChanges();
+    this.idProofs = this.firestore.collection('IdProofs', x => x.orderBy('type')).valueChanges();    
   }
 
   ngOnInit() {
@@ -90,10 +98,32 @@ export class RegisterComponent implements OnInit {
 
   CopyAddress() {
     if (this.isSameAddressControl.value) {
-    const value = this.registerForm.get('presentaddress').value;
-    this.registerForm.get('permanentaddress').patchValue(value);
+      const value = this.registerForm.get('address').get('presentaddress').value;
+      this.registerForm.get('address').get('permanentaddress').patchValue(value);
     } else {
-      this.registerForm.get('permanentaddress').reset();
+      this.registerForm.get('address').get('permanentaddress').reset();
+    }
+  }
+
+  Register() {
+    try {
+      this.firestore.collection('Owner').add(this.registerForm.value);
+      this.success = true;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  isHovering: boolean;
+
+  files: File[] = [];
+
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+  }
+
+  onDrop(files: FileList) {
+    for (let i = 0; i < files.length; i++) {
+      this.files.push(files.item(i));
     }
   }
 

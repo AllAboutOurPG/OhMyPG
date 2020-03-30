@@ -28,3 +28,8 @@
     grid-template-columns: repeat(auto-fit,minmax(384px, 1fr));
     padding:40px;
   }
+
+  .register-button {
+    position: relative;
+    text-align: center;
+  }

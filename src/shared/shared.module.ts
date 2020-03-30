@@ -8,10 +8,12 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestor
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from 'src/environments/environment';
+import { DropzoneDirective } from './dropzone/dropzone.directive';
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, DropzoneDirective,UploadTaskComponent],
   imports: [
     CommonModule,
     MaterialModule,

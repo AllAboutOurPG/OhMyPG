@@ -13,8 +13,12 @@ import { environment } from 'src/environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import { SharedModule } from "../shared/shared.module";
+<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+=======
+import { AngularFireStorage } from '@angular/fire/storage';
+>>>>>>> origin/master
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
     MaterialModule,
     SharedModule
   ],
+<<<<<<< HEAD
   providers: [AngularFirestore, AngularFireAuth],
+=======
+  providers: [AngularFirestore,AngularFireStorage],
+>>>>>>> origin/master
   bootstrap: [AppComponent]
 })
 export class AppModule { }
