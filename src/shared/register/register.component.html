@@ -4,7 +4,22 @@
       <mat-tab-group>
         <mat-tab label="Personal Details">
           <ng-template matTabContent>
-            <div formGroupName="personalDetails" class="personal-container">
+            <br>
+            <div style="padding-left: 30%;padding-right: 30%;">
+              <mat-form-field class="width100">
+                <mat-label>Register as: *</mat-label>
+                <mat-select formControlName="registerAs">
+                  <mat-option [value]="true">
+                    Owner
+                  </mat-option>
+                  <mat-option [value]="false">
+                    Tenant
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+            <div formGroupName="personalDetails" class="personal-container" *ngIf="registerForm.get('registerAs').valid">
               <div class="personal-section1">
                 <mat-form-field class="width100">
                   <mat-label>First Name*</mat-label>
@@ -65,17 +80,17 @@
                   <mat-label>Email 2</mat-label>
                   <input matInput placeholder="Ex : michealjackson@gmail.com" formControlName="email2">
                 </mat-form-field>
-                <!-- <mat-form-field class="width100">
+                <mat-form-field class="width100">
                   <mat-label>Nationality*</mat-label>
                   <mat-select formControlName="nationality">
-                    <mat-option [value]="Indian">
+                    <mat-option [value]="true">
                       Indian
                     </mat-option>
-                    <mat-option [value]="Others">
+                    <mat-option [value]="false">
                       Others
                     </mat-option>
                   </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>PAN No</mat-label>
                   <input matInput placeholder="ABCDE1234F" formControlName="panNo" maxlength="10">
@@ -116,9 +131,39 @@
                 </mat-form-field>
               </div>
             </div>
+            <div class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
+              [class.hovering]="isHovering" *ngIf="registerForm.get('registerAs').valid">
+              
+              <div style="padding-left: 25%;padding-right: 30%;">
+                <h3>Upload your ID Proof here</h3>
+                <mat-form-field style="width: 150%;">
+                  <mat-label>Select an ID proof to upload*</mat-label>
+                  <mat-select formControlName="uploadFile" [(value)]="selectedProof">
+                    <mat-option *ngFor="let proof of idProofs | async" [value]="proof.type">
+                      {{proof.type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>            
+              
+              <div class="file" *ngIf="registerForm.get('uploadFile').valid">
+                <p>Drag and Drop File or ... </p>
+                <label class="file-label">
+                  <input class="file-input" formControlName="chooseFile" type="file" (change)="onDrop($event.target.files)">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fa fa-upload"></i>
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div *ngFor="let file of files">
+              <upload-task [file]="file" [documentType]="selectedProof"></upload-task>
+            </div>            
           </ng-template>
         </mat-tab>
-        <mat-tab *ngIf="registerForm.get('personalDetails').valid" label="Address Details ">
+        <mat-tab label="Address Details" [disabled]="registerForm.get('personalDetails').invalid">
           <ng-template matTabContent>
             <div formGroupName="address" class="Address-container">
               <div class="card" formGroupName="presentaddress">
@@ -204,8 +249,8 @@
               </div>
             </div>
           </ng-template>
-        </mat-tab >
-        <mat-tab *ngIf="registerForm.get('address').valid && registerForm.get('personalDetails').valid"  label="Official Information">
+        </mat-tab>
+        <mat-tab label="Official Information" [disabled]="registerForm.get('address').invalid">
           <ng-template matTabContent>
             <div formGroupName="officalInfo" class="personal-container">
               <div class="personal-section1">
@@ -260,7 +305,7 @@
               <div class="personal-section3">
                 <mat-form-field class="width100">
                   <mat-label>Vehicle No(if any)</mat-label>
-                  <input matInput placeholder="Ex: TS12AB3456" formControlName="vehicleNo">
+                  <input matInput placeholder="Ex: TS 01 AB 1234" formControlName="vehicleNo">
                 </mat-form-field>
                 <mat-form-field class="width100">
                   <mat-label>Company Email(for employees only)</mat-label>

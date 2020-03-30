@@ -12,10 +12,9 @@ import {
   MatOptionModule,
   MatFormFieldModule,
   MatCheckboxModule,
-  MatButtonModule
+  MatButtonModule,
+  MatProgressBarModule
 } from '@angular/material';
-
-
 @NgModule({
   exports: [ReactiveFormsModule,
     MatListModule,
@@ -28,6 +27,7 @@ import {
     MatOptionModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatButtonModule]
+    MatButtonModule,
+    MatProgressBarModule]
 })
 export class MaterialModule { }
