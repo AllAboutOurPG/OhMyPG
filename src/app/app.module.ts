@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import { SharedModule } from "../shared/shared.module";
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { SharedModule } from "../shared/shared.module";
     MaterialModule,
     SharedModule
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore,AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
