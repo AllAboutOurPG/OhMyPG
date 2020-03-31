@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-register',
@@ -81,7 +82,7 @@ export class RegisterComponent implements OnInit {
     chooseFile: ['',Validators.required]
   });
 
-  constructor(private firestore: AngularFirestore, private registerFormBuilder: FormBuilder) {
+  constructor(private firestore: AngularFirestore, private registerFormBuilder: FormBuilder, private loginService: LoginService) {
     this.professions = this.firestore.collection('Professions', x => x.orderBy('type')).valueChanges();
     this.bloodGroups = this.firestore.collection('BloodGroups', x => x.orderBy('type')).valueChanges();
     this.educationalQualifications = this.firestore.collection('EducationalQualifications', x => x.orderBy('degree')).valueChanges();
@@ -107,7 +108,7 @@ export class RegisterComponent implements OnInit {
 
   Register() {
     try {
-      this.firestore.collection('Owner').add(this.registerForm.value);
+      this.firestore.collection('userProfiles').doc(this.loginService.userDetails.uid).set(this.registerForm.value);
       this.success = true;
     } catch (err) {
       console.error(err);

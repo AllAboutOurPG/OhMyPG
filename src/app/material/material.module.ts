@@ -12,6 +12,7 @@ import {
   MatOptionModule,
   MatFormFieldModule,
   MatCheckboxModule,
+  MatMenuModule,
   MatButtonModule,
   MatProgressBarModule
 } from '@angular/material';
@@ -27,6 +28,7 @@ import {
     MatOptionModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatMenuModule,
     MatButtonModule,
     MatProgressBarModule]
 })

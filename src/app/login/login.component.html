@@ -1,0 +1,9 @@
+<div *ngIf="auth?.user | async as user; else showLogin">    
+    <button mat-button [matMenuTriggerFor]="menu"><h1>Hello {{ user?.displayName }}! <span><img [src]="user.photoURL" class="profile-image"></span></h1></button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+  <ng-template #showLogin>
+    <button mat-raised-button color="warn" (click)="login()">Login</button>
+  </ng-template>

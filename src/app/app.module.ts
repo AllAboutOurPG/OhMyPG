@@ -13,11 +13,14 @@ import { environment } from 'src/environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import { SharedModule } from "../shared/shared.module";
+import { LoginComponent } from './login/login.component';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -26,10 +29,11 @@ import { AngularFireStorage } from '@angular/fire/storage';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     MaterialModule,
     SharedModule
   ],
-  providers: [AngularFirestore,AngularFireStorage],
+  providers: [AngularFirestore, AngularFireAuth, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

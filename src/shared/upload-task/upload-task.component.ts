@@ -3,6 +3,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'upload-task',
@@ -13,6 +14,7 @@ export class UploadTaskComponent implements OnInit {
 
   @Input() file: File;
   @Input() documentType : string;
+  @Input() collectionPath : string;
 
   task: AngularFireUploadTask;
 
@@ -20,7 +22,7 @@ export class UploadTaskComponent implements OnInit {
   snapshot: Observable<any>;
   downloadURL: string;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, private loginService: LoginService) { }
 
   ngOnInit() {
     this.startUpload();
@@ -46,7 +48,7 @@ export class UploadTaskComponent implements OnInit {
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
       //Needs works on the document
-        this.db.collection('files').doc("LA").set({documentType :this.documentType, downloadURL: this.downloadURL, path });
+        this.db.collection(this.collectionPath).doc(this.loginService.userDetails.uid).set({documentType :this.documentType, downloadURL: this.downloadURL, path });
       }),
     );
   }
