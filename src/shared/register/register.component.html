@@ -163,7 +163,7 @@
             </div>            
           </ng-template>
         </mat-tab>
-        <mat-tab label="Address Details" [disabled]="registerForm.get('personalDetails').invalid">
+        <mat-tab label="Address Details" [disabled]="registerForm.get('uploadFile').invalid || registerForm.get('chooseFile').invalid || registerForm.get('personalDetails').invalid">
           <ng-template matTabContent>
             <div formGroupName="address" class="Address-container">
               <div class="card" formGroupName="presentaddress">
@@ -250,7 +250,7 @@
             </div>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Official Information" [disabled]="registerForm.get('address').invalid">
+        <mat-tab label="Official Information" [disabled]="registerForm.get('address').invalid || registerForm.get('personalDetails').invalid">
           <ng-template matTabContent>
             <div formGroupName="officalInfo" class="personal-container">
               <div class="personal-section1">
@@ -322,11 +322,12 @@
               </div>
             </div>
             <div class="register-button">
-            <button mat-raised-button color="primary" (click)="Register()" [disabled]="registerForm.invalid">Register</button>
-          </div>
+              <button mat-raised-button color="primary" (click)="Register()" [disabled]="registerForm.invalid">Register</button>
+            </div>
           </ng-template>
         </mat-tab>
       </mat-tab-group>
     </form>
+   
   </div>
 </div>

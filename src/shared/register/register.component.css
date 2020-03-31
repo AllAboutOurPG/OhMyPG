@@ -33,3 +33,7 @@
     position: relative;
     text-align: center;
   }
+
+  .mat-raised-button {
+    min-width: 12%;
+}

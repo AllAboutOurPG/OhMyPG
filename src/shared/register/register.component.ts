@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm = this.registerFormBuilder.group({
     registerAs: ['', Validators.required],
-    personalDetails: this.registerFormBuilder.group({      
+    personalDetails: this.registerFormBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       middleName: [''],
@@ -42,28 +42,28 @@ export class RegisterComponent implements OnInit {
       aadharNo: ['', [Validators.required, Validators.pattern('^([0-9]){12}$')]],
       panNo: ['', [Validators.pattern('^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$')]],
       passportNo: ['', [Validators.pattern('^(?!^0+$)[a-zA-Z0-9]{3,20}$')]],
-      languagesKnown: ['']      
+      languagesKnown: ['']
     }),
     address: this.registerFormBuilder.group({
-    presentaddress: this.registerFormBuilder.group({
-      address1: ['', [Validators.required, Validators.maxLength(30)]],
-      address2: ['', [Validators.required, Validators.maxLength(30)]],
-      address3: [''],
-      landMark: ['', [Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
-      city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
-      state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
+      presentaddress: this.registerFormBuilder.group({
+        address1: ['', [Validators.required, Validators.maxLength(30)]],
+        address2: ['', [Validators.required, Validators.maxLength(30)]],
+        address3: [''],
+        landMark: ['', [Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
+        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
+        state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+        pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
+      }),
+      permanentaddress: this.registerFormBuilder.group({
+        address1: ['', Validators.required],
+        address2: ['', Validators.required],
+        address3: [''],
+        landMark: ['', Validators.pattern('^[a-zA-Z]+$')],
+        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+        state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+        pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
+      })
     }),
-    permanentaddress: this.registerFormBuilder.group({
-      address1: ['', Validators.required],
-      address2: ['', Validators.required],
-      address3: [''],
-      landMark: ['', Validators.pattern('^[a-zA-Z]+$')],
-      city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
-    })
-  }),
     officalInfo: this.registerFormBuilder.group({
       profession: ['', Validators.required],
       qualification: ['', Validators.required],
@@ -74,11 +74,11 @@ export class RegisterComponent implements OnInit {
       emergencyRelation: ['', Validators.required],
       emergencyPhone: ['', [Validators.pattern('^[6-9]\\d{9}$'), Validators.required]],
       emergencyPhone2: ['', Validators.pattern('^[6-9]\\d{9}$')],
-      companyEmail: ['', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
-      vehicleNo: ['',Validators.pattern('^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$')]
+      companyEmail: ['', [Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
+      vehicleNo: ['', Validators.pattern('^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$')]
     }),
     uploadFile: ['', Validators.required],
-    chooseFile: ['',Validators.required]
+    chooseFile: ['', Validators.required]
   });
 
   constructor(private firestore: AngularFirestore, private registerFormBuilder: FormBuilder) {
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
     this.genders = this.firestore.collection('Genders', x => x.orderBy('gender')).valueChanges();
     this.martialStatus = this.firestore.collection('MaritalStatus', x => x.orderBy('status')).valueChanges();
     this.religions = this.firestore.collection('Religions', x => x.orderBy('religion')).valueChanges();
-    this.idProofs = this.firestore.collection('IdProofs', x => x.orderBy('type')).valueChanges();    
+    this.idProofs = this.firestore.collection('IdProofs', x => x.orderBy('type')).valueChanges();
   }
 
   ngOnInit() {
@@ -106,13 +106,20 @@ export class RegisterComponent implements OnInit {
   }
 
   Register() {
+    const type = this.registerForm.get('registerAs');
     try {
-      this.firestore.collection('Owner').add(this.registerForm.value);
-      this.success = true;
+      if (type) {
+        this.firestore.collection('Owners').add(this.registerForm.value);
+        this.success = true;
+      } else {
+        this.firestore.collection('Tenants').add(this.registerForm.value);
+        this.success = true;
+      }
     } catch (err) {
       console.error(err);
     }
   }
+
   isHovering: boolean;
 
   files: File[] = [];
