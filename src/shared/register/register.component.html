@@ -159,7 +159,7 @@
               </div>
             </div>
             <div *ngFor="let file of files">
-              <upload-task [file]="file" [documentType]="selectedProof"></upload-task>
+              <upload-task [file]="file" [documentType]="selectedProof" [collectionPath]="'registerProofs'"></upload-task>
             </div>            
           </ng-template>
         </mat-tab>

@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
 
   Register() {
     try {
-      this.firestore.collection('userProfile/'+ this.loginService.userDetails.uid).add(this.registerForm.value);
+      this.firestore.collection('userProfiles').doc(this.loginService.userDetails.uid).set(this.registerForm.value);
       this.success = true;
     } catch (err) {
       console.error(err);

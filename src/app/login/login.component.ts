@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.user$.subscribe((user)=>{
-      console.log(this.loginService.userDetails.uid);
       if(user && !user.registered){
         this.router.navigate(['/register']);
       }
