@@ -106,7 +106,7 @@ export class RegisterComponent implements OnInit {
   }
 
   Register() {
-    const type = this.registerForm.get('registerAs');
+    const type = this.registerForm.get('registerAs').value;
     try {
       if (type) {
         this.firestore.collection('Owners').add(this.registerForm.value);
