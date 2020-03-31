@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'src/shared/models/user.model';
 
@@ -12,15 +12,16 @@ import { User } from 'src/shared/models/user.model';
 export class LoginService {
 
   user$: Observable<User>;
+  userDetails: User;
 
   constructor(public angularFireAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user$ = this.angularFireAuth.authState.pipe(
       switchMap(user => {
           // Logged in
         if (user) {
+          this.userDetails = user;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          // Logged out
           return of(null);
         }
       })
@@ -43,7 +44,11 @@ export class LoginService {
       photoURL: user.photoURL
     } 
 
-    return userRef.set(data, { merge: true })
+    // this.afs.doc(`users/${user.uid}`).valueChanges().pipe(take(1)).subscribe((res)=>{
+    //   console.log(res);
+    // })
+
+    return userRef.update(data)
 
   }
 
