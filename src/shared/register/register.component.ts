@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   idProofs: Observable<any>;
   isSameAddressControl: FormControl = new FormControl(false);
   success = false;
+  selectedProof:any;
 
   registerForm = this.registerFormBuilder.group({
     registerAs: ['', Validators.required],

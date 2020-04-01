@@ -48,7 +48,7 @@ export class LoginService {
     //   console.log(res);
     // })
 
-    return userRef.update(data)
+    return userRef.set(data, { merge: true })
 
   }
 
