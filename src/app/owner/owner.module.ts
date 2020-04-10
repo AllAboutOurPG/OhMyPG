@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ]
 })
 export class OwnerModule { }

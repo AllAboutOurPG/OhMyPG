@@ -14,8 +14,14 @@ import {
   MatCheckboxModule,
   MatMenuModule,
   MatButtonModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatExpansionModule,
+  MatBottomSheet
 } from '@angular/material';
+
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   exports: [ReactiveFormsModule,
     MatListModule,
@@ -30,6 +36,12 @@ import {
     MatCheckboxModule,
     MatMenuModule,
     MatButtonModule,
-    MatProgressBarModule]
+    MatProgressBarModule,
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatBottomSheet
+  ]
 })
 export class MaterialModule { }

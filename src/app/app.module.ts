@@ -16,11 +16,14 @@ import { SharedModule } from "../shared/shared.module";
 import { LoginComponent } from './login/login.component';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { OwnerModule } from './owner/owner.module';
+import { HomeComponent } from './owner/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    OwnerModule
   ],
   providers: [AngularFirestore, AngularFireAuth, AngularFireStorage],
   bootstrap: [AppComponent]
