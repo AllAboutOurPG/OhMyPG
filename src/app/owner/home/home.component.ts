@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('showRoomDetails', { static: true }) public showRoomDetails: TemplateRef<any>;
 
-  constructor() { }  
+  constructor(private firestore: AngularFirestore,private _bottomSheet: MatBottomSheet) { }  
 
   ngOnInit() {
+  }
+
+  roomDetails()
+  {
+    this._bottomSheet.open(this.showRoomDetails);
   }
 
 }
