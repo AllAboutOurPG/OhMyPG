@@ -16,7 +16,7 @@ import {
   MatButtonModule,
   MatProgressBarModule,
   MatExpansionModule,
-  MatBottomSheet
+  MatBottomSheetModule
 } from '@angular/material';
 
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -41,7 +41,7 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule,
     MatButtonModule,
     MatExpansionModule,
-    MatBottomSheet
+    MatBottomSheetModule
   ]
 })
 export class MaterialModule { }
