@@ -9,10 +9,10 @@
               <mat-form-field class="width100">
                 <mat-label>Register as: *</mat-label>
                 <mat-select formControlName="registerAs">
-                  <mat-option [value]="true">
+                  <mat-option [value]="0">
                     Owner
                   </mat-option>
-                  <mat-option [value]="false">
+                  <mat-option [value]="1">
                     Tenant
                   </mat-option>
                 </mat-select>
@@ -159,7 +159,7 @@
               </div>
             </div>
             <div *ngFor="let file of files">
-              <upload-task [file]="file" [documentType]="selectedProof"></upload-task>
+              <upload-task [file]="file" [documentType]="selectedProof" [collectionPath]="'registerProofs'"></upload-task>
             </div>            
           </ng-template>
         </mat-tab>
