@@ -6,7 +6,7 @@
   .floorMatCardDiv {
     display: inline-flex;
     padding: 10px;
-    background: inherit;
+    /* background: inherit; */
     margin: auto;
   }
 
@@ -18,11 +18,13 @@
     width: 360px;
     height: auto;
     margin: auto;
-    background: #C90415;
+
+    background:purple;
+    /* background: #C90415; */
   }
 
   .example-card1 {
     width: 250px;
     height: auto;
-    background:#C90415;
+    background:royalblue;
   }
