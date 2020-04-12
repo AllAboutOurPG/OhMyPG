@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginService.user$.subscribe((user)=>{
       if(user && !user.registered){
-        this.router.navigate(['/home']);
+        this.router.navigate(['/register']);
       }
     })
   }

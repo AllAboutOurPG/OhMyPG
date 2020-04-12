@@ -44,24 +44,24 @@ export class RegisterComponent implements OnInit {
       aadharNo: ['', [Validators.required, Validators.pattern('^([0-9]){12}$')]],
       panNo: ['', [Validators.pattern('^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$')]],
       passportNo: ['', [Validators.pattern('^(?!^0+$)[a-zA-Z0-9]{3,20}$')]],
-      languagesKnown: ['']      
+      languagesKnown: ['',Validators.required]      
     }),
     address: this.registerFormBuilder.group({
     presentaddress: this.registerFormBuilder.group({
       address1: ['', [Validators.required, Validators.maxLength(30)]],
       address2: ['', [Validators.required, Validators.maxLength(30)]],
-      address3: [''],
-      landMark: ['', [Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
-      city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
+      landmark: ['',Validators.maxLength(30)],
+      area: ['', [Validators.required,Validators.maxLength(30)]],
+      district: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(30)]],
       state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
     }),
     permanentaddress: this.registerFormBuilder.group({
       address1: ['', Validators.required],
       address2: ['', Validators.required],
-      address3: [''],
-      landMark: ['', Validators.pattern('^[a-zA-Z]+$')],
-      city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      landmark: ['',Validators.maxLength(30)],
+      area: ['', [Validators.required,Validators.maxLength(30)]],
+      district: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       state: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6,6}$')]]
     })
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
       emergencyRelation: ['', Validators.required],
       emergencyPhone: ['', [Validators.pattern('^[6-9]\\d{9}$'), Validators.required]],
       emergencyPhone2: ['', Validators.pattern('^[6-9]\\d{9}$')],
-      companyEmail: ['', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
+      companyEmail: ['', [Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]],
       vehicleNo: ['',Validators.pattern('^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$')]
     }),
     uploadFile: ['', Validators.required],
