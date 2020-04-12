@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class UploadTaskComponent implements OnInit {
   @Input() file: File;
   @Input() documentType : string;
   @Input() collectionPath : string;
-
+  @Output() getDocPath = new EventEmitter<string>();
   task: AngularFireUploadTask;
 
   percentage: Observable<number>;
@@ -48,6 +48,7 @@ export class UploadTaskComponent implements OnInit {
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
       //Needs works on the document
+        this.getDocPath.emit(this.downloadURL);
         this.db.collection(this.collectionPath).doc(this.loginService.userDetails.uid).set({documentType :this.documentType, downloadURL: this.downloadURL, path });
       }),
     );

@@ -96,6 +96,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginService.user$.subscribe((user)=>{
+      if(user){
+        this.registerForm.get('personalDetails').get('email1').setValue(user.email)
+      }
+    })
   }
 
   CopyAddress() {
@@ -105,6 +110,10 @@ export class RegisterComponent implements OnInit {
     } else {
       this.registerForm.get('address').get('permanentaddress').reset();
     }
+  }
+
+  onDocPath(path: string) {
+    this.registerForm.get('chooseFile').setValue(path);
   }
 
   Register() {
